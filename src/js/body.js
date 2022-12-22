@@ -1,4 +1,4 @@
-export function addBody () {
+export default function addBody () {
     const body = document.querySelector("body");
     const bodyText =  `<form class="search-form" id="search-form">
     <input
@@ -17,6 +17,3 @@ export function addBody () {
 
 }
 
-export function createGalleryCards(images) {
-  return images.map ()
-}

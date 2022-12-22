@@ -9,12 +9,14 @@ addBody();
 const refs = {
   inputForm: document.querySelector('#search-form'),
   loadMoreBtn: document.querySelector('.load-more'),
+  gallery: document.querySelector('.gallery'),
 }
 
 refs.inputForm.addEventListener('submit', onSubmit);
 
 function onSubmit(event) {
   event.preventDefault();
+  
 
 }
 
