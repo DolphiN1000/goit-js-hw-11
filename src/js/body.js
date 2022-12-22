@@ -1,4 +1,4 @@
-export default function addBody () {
+export function addBody () {
     const body = document.querySelector("body");
     const bodyText =  `<form class="search-form" id="search-form">
     <input
@@ -15,4 +15,8 @@ export default function addBody () {
     <button type="button" class="load-more">Load more</button>`;
     body.insertAdjacentHTML('beforeend', bodyText);
 
+}
+
+export function createGalleryCards(images) {
+  return images.map ()
 }
