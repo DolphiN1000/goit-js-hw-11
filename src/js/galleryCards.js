@@ -14,7 +14,7 @@ export function createGalleryCards(hits) {
         border: solid 1px; border-radius: 16px; overflow: hidden; color: black;">
     <a href="${largeImageURL}" style="
     width: auto;
-"><img src="${webformatURL}L" alt="${tags}" style='max-width: 100%; height:auto' loading="lazy" />
+"><img src="${webformatURL}L" alt="${tags}" loading="lazy" style='max-width: 100%; height:auto'/>
     <div class="info"style="
     display: flex;
         font-size: 12px;
