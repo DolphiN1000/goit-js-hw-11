@@ -86,9 +86,7 @@ async function loadMoreOnClick() {
     const getPictures = await fetchApiPictures.fetchPictures();
     ({ hits, totalHits } = getPictures);
     const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
-    const markup = createGalleryCards(hits);
-    refs.gallery.insertAdjacentHTML('beforeend', markup);
-    lightbox.refresh();
+    await checkAndDisplay(getPictures);
     if (fetchApiPictures.page >= totalPage) {
       refs.loadMoreBtn.style.display = 'none';
       Notiflix.Notify.warning(
