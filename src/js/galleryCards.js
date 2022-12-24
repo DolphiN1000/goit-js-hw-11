@@ -1,19 +1,53 @@
-export function createGalleryCards(images) {
-    return images.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => `<div class="photo-card">
-    <a href="${largeImageURL}"><img src="${webformatURL}L" alt="${tags}" loading="lazy" />
-    <div class="info">
-      <p class="info-item">
-        <b>${likes}</b>
+export function createGalleryCards(hits) {
+    // markup =
+  return hits
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `<div class="photo-card" style="display: flex; max-width: 25%; height:auto; background-color: grey;
+        border: solid 1px; border-radius: 16px; overflow: hidden; color: black;">
+    <a href="${largeImageURL}" style="
+    width: auto;
+"><img src="${webformatURL}L" alt="${tags}" style='max-width: 100%; height:auto' loading="lazy" />
+    <div class="info"style="
+    display: flex;
+        font-size: 12px;
+        text-align: center;
+        font-weight: normal;
+">
+      <p class="info-item" style="
+      width: auto;
+  ">
+        <b>Likes: ${likes}</b>
       </p>
-      <p class="info-item">
-        <b>${views}</b>
+      <p class="info-item" style="
+      width: auto;
+  ">
+        <b>Views: ${views}</b>
       </p>
-      <p class="info-item">
-        <b>${comments}</b>
+      <p class="info-item" style="
+      width: auto;
+  ">
+        <b>Comments: ${comments}</bComments>
       </p>
-      <p class="info-item">
-        <b>${downloads}</b>
+      <p class="info-item" style="
+      width: auto; 
+      font-weight: normal;
+  ">
+        <b>Downloads: ${downloads}</b>
       </p>
     </div>
-  </div>`).join('');
-  }
+  </div>`;
+      }
+    )
+    .join('');
+    console.log(markup)
+ 
+}
