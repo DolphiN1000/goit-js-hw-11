@@ -11,7 +11,7 @@ export function createGalleryCards(hits) {
         comments,
         downloads,
       }) => {
-        return `<div class="photo-card" style="display: flex; max-width: 25%; height:auto; background-color: grey;
+        return `<div class="photo-card" style="display: flex; max-width: 23%; height:auto; background-color: grey;
         border: solid 1px; border-radius: 16px; overflow: hidden; color: black;">
     <a href="${largeImageURL}" style="
     width: auto;
