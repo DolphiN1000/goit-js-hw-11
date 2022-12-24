@@ -86,7 +86,7 @@ function checkAndDisplay({ hits, totalHits }) {
 async function loadMoreOnClick() {
   try {
     const getPictures = await fetchApiPictures.fetchPictures();
-    await checkAndDisplayLoadMore(getPictures);
+    (getPictures);
   } catch (error) {
     console.log(error.message);
     Notiflix.Notify.failure(
@@ -95,7 +95,7 @@ async function loadMoreOnClick() {
   }
 }
 
-function checkAndDisplayLoadMore({ hits, totalHits }) {
+function checkAndDisplayLoadMore({ hits, totalHits,}) {
   const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
   if (fetchApiPictures.page >= totalPage) {
     refs.loadMoreBtn.style.display = 'none';
@@ -107,12 +107,3 @@ function checkAndDisplayLoadMore({ hits, totalHits }) {
   refs.gallery.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 }
-
-// const { height: cardHeight } = document
-//   .querySelector('.gallery')
-//   .firstElementChild.getBoundingClientRect();
-
-// window.scrollBy({
-//   top: cardHeight * 2,
-//   behavior: 'smooth',
-// });
