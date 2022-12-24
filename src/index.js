@@ -14,7 +14,7 @@ import { createGalleryCards } from './js/galleryCards';
 import Notiflix from 'notiflix';
 
 const fetchApiPictures = new FetchApiPictures();
-
+let totalPage = 1;
 const refs = {
   inputForm: document.querySelector('#search-form'),
   loadMoreBtn: document.querySelector('.load-more'),
@@ -43,6 +43,8 @@ async function onSubmit(event) {
 
     const getPictures = await fetchApiPictures.fetchPictures();
     await checkAndDisplay(getPictures);
+    const { hits, totalHits } = getPictures;
+    totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
   } catch (error) {
     Notiflix.Notify.failure(
       '"Sorry, there are no images matching your search query. Please try again."'
@@ -80,11 +82,11 @@ function checkAndDisplay({ hits, totalHits }) {
   }
 }
 
-async function loadMoreOnClick(totalHits) {
+async function loadMoreOnClick() {
   try {
     fetchApiPictures.increaseCounter();
     const getPictures = await fetchApiPictures.fetchPictures();
-    const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
+    const { hits, totalHits } = getPictures;
     await checkAndDisplay(getPictures);
     if (fetchApiPictures.page >= totalPage) {
       refs.loadMoreBtn.style.display = 'none';
