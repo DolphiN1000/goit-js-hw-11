@@ -1,7 +1,6 @@
 export default function addBody() {
   const body = document.querySelector('body');
-  // body.style.display = flex;
-  // body.style.alignItems = center;
+
   const bodyText = `<form class="search-form" id="search-form" style="display: flex">
     <input
       type="text"
@@ -34,6 +33,4 @@ export default function addBody() {
     background-color: tomato;
     ">Load more</button>`;
   body.insertAdjacentHTML('beforeend', bodyText);
-  // body.style.display = flex;
-  // body.style.alignItems = center;
 }

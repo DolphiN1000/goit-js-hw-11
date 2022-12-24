@@ -1,5 +1,4 @@
 export function createGalleryCards(hits) {
-    // markup =
   return hits
     .map(
       ({
@@ -48,6 +47,4 @@ export function createGalleryCards(hits) {
       }
     )
     .join('');
-    console.log(markup)
- 
 }
