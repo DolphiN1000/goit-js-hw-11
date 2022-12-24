@@ -13,7 +13,6 @@ export class FetchApiPictures {
       const response = await axios.get(
         `?key=${API_KEY}&q=${this.request}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.per_page}`
       );
-      this.increaseCounter();
       return response.data;
     } catch (error) {
       throw new Error(error.message);

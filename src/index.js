@@ -10,6 +10,7 @@ import './js/fetchPictures';
 import { FetchApiPictures } from './js/fetchPictures';
 
 import { createGalleryCards } from './js/galleryCards';
+
 import Notiflix from 'notiflix';
 
 const fetchApiPictures = new FetchApiPictures();
@@ -33,18 +34,13 @@ var lightbox = new SimpleLightbox('.gallery', {
 async function onSubmit(event) {
   try {
     event.preventDefault();
+    refs.loadMoreBtn.style.display = 'none';
     fetchApiPictures.request = event.currentTarget.searchQuery.value
       .trim()
       .toLowerCase();
     fetchApiPictures.resetCounter();
     clearCardList();
 
-    if (!fetchApiPictures.request) {
-      refs.loadMoreBtn.style.display = 'none';
-      return Notiflix.Notify.failure(
-        '"Sorry, there are no images matching your search query. Please try again."'
-      );
-    }
     const getPictures = await fetchApiPictures.fetchPictures();
     await checkAndDisplay(getPictures);
   } catch (error) {
@@ -57,6 +53,7 @@ async function onSubmit(event) {
 function clearCardList() {
   refs.gallery.innerHTML = '';
 }
+
 var lightbox = new SimpleLightbox('.gallery a', {
   /* options */
   captions: true,
@@ -85,25 +82,23 @@ function checkAndDisplay({ hits, totalHits }) {
 
 async function loadMoreOnClick() {
   try {
+    fetchApiPictures.increaseCounter();
     const getPictures = await fetchApiPictures.fetchPictures();
-    (getPictures);
+    ({ hits, totalHits } = getPictures);
+    const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
+    if (fetchApiPictures.page <= totalPage) {
+      refs.loadMoreBtn.style.display = 'none';
+      Notiflix.Notify.warning(
+        "We're sorry, but you've reached the end of search results."
+      );
+    }
+    const markup = createGalleryCards(hits);
+    refs.gallery.insertAdjacentHTML('beforeend', markup);
+    lightbox.refresh();
   } catch (error) {
     console.log(error.message);
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
   }
-}
-
-function checkAndDisplayLoadMore({ hits, totalHits,}) {
-  const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
-  if (fetchApiPictures.page >= totalPage) {
-    refs.loadMoreBtn.style.display = 'none';
-    Notiflix.Notify.warning(
-      "We're sorry, but you've reached the end of search results."
-    );
-  }
-  const markup = createGalleryCards(hits);
-  refs.gallery.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh();
 }
