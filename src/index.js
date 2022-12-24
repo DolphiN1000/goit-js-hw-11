@@ -80,7 +80,7 @@ function checkAndDisplay({ hits, totalHits }) {
   }
 }
 
-async function loadMoreOnClick() {
+async function loadMoreOnClick({ hits, totalHits }) {
   try {
     fetchApiPictures.increaseCounter();
     const getPictures = await fetchApiPictures.fetchPictures();
