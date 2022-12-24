@@ -80,7 +80,7 @@ function checkAndDisplay({ hits, totalHits }) {
   }
 }
 
-async function loadMoreOnClick({ hits, totalHits }) {
+async function loadMoreOnClick() {
   try {
     fetchApiPictures.increaseCounter();
     const getPictures = await fetchApiPictures.fetchPictures();
@@ -89,7 +89,7 @@ async function loadMoreOnClick({ hits, totalHits }) {
     const markup = createGalleryCards(hits);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
     lightbox.refresh();
-    if (fetchApiPictures.page <= totalPage) {
+    if (fetchApiPictures.page >= totalPage) {
       refs.loadMoreBtn.style.display = 'none';
       Notiflix.Notify.warning(
         "We're sorry, but you've reached the end of search results."
