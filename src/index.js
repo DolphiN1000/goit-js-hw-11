@@ -85,17 +85,16 @@ async function loadMoreOnClick() {
     fetchApiPictures.increaseCounter();
     const getPictures = await fetchApiPictures.fetchPictures();
     ({ hits, totalHits } = getPictures);
-    console.log( hits, totalHits )
     const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
     if (fetchApiPictures.page <= totalPage) {
       refs.loadMoreBtn.style.display = 'none';
       Notiflix.Notify.warning(
         "We're sorry, but you've reached the end of search results."
       );
-    }
+    
     const markup = createGalleryCards(hits);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
-    lightbox.refresh();
+    lightbox.refresh();}
   } catch (error) {
     console.log(error.message);
     Notiflix.Notify.failure(
