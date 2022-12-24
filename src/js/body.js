@@ -23,7 +23,7 @@ export default function addBody() {
     background-color: tomato;
     ">Search</button>
     </form>
-    <div class="gallery" style="display: flex; gap: 30px; flex-wrap: wrap">
+    <div class="gallery" style="display: flex; gap: 30px; flex-wrap: wrap; margin: 15px">
     <!-- Картки зображень -->
     </div>
     <button type="button" class="load-more" style="display: none;margin-left:auto; margin-right: auto;
