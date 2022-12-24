@@ -33,26 +33,23 @@ var lightbox = new SimpleLightbox('.gallery', {
 async function onSubmit(event) {
   try {
     event.preventDefault();
-    console.log(event.target.searchQuery.value.trim());
     fetchApiPictures.request = event.currentTarget.searchQuery.value
       .trim()
       .toLowerCase();
-    console.log(fetchApiPictures.request);
     fetchApiPictures.resetCounter();
     clearCardList();
 
     if (!fetchApiPictures.request) {
       refs.loadMoreBtn.style.display = 'none';
       return Notiflix.Notify.failure(
-        '"Sorry, there are no images matching your search query. Please try again1."'
+        '"Sorry, there are no images matching your search query. Please try again."'
       );
     }
     const getPictures = await fetchApiPictures.fetchPictures();
-    console.log(getPictures);
     await checkAndDisplay(getPictures);
   } catch (error) {
     Notiflix.Notify.failure(
-      '"Sorry, there are no images matching your search query. Please try again2."'
+      '"Sorry, there are no images matching your search query. Please try again."'
     );
   }
 }
@@ -79,18 +76,15 @@ function checkAndDisplay({ hits, totalHits }) {
     const markup = createGalleryCards(hits);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
     lightbox.refresh();
-    if (totalHits > 20) {
-      console.dir(refs.loadMoreBtn);
+    if (totalHits > 40) {
       refs.loadMoreBtn.style.display = 'block';
     }
-    loadMoreBtn.show();
     return;
   }
 }
 
 async function loadMoreOnClick() {
   try {
-    console.log('clic1');
     const getPictures = await fetchApiPictures.fetchPictures();
     await checkAndDisplayLoadMore(getPictures);
   } catch (error) {
@@ -102,19 +96,16 @@ async function loadMoreOnClick() {
 }
 
 function checkAndDisplayLoadMore({ hits, totalHits }) {
-  console.log('click2');
   const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
   if (fetchApiPictures.page >= totalPage) {
     refs.loadMoreBtn.style.display = 'none';
-    return Notiflix.Notify.warning(
+    Notiflix.Notify.warning(
       "We're sorry, but you've reached the end of search results."
     );
-  } else {
-    const markup = createGalleryCards(hits);
-    refs.gallery.insertAdjacentHTML('beforeend', markup);
-    lightbox.refresh();
-    return;
   }
+  const markup = createGalleryCards(hits);
+  refs.gallery.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh();
 }
 
 // const { height: cardHeight } = document
