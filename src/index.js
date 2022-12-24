@@ -80,11 +80,10 @@ function checkAndDisplay({ hits, totalHits }) {
   }
 }
 
-async function loadMoreOnClick() {
+async function loadMoreOnClick(totalHits) {
   try {
     fetchApiPictures.increaseCounter();
     const getPictures = await fetchApiPictures.fetchPictures();
-    ({ hits, totalHits } = getPictures);
     const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
     await checkAndDisplay(getPictures);
     if (fetchApiPictures.page >= totalPage) {
