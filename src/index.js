@@ -85,6 +85,7 @@ async function loadMoreOnClick() {
     fetchApiPictures.increaseCounter();
     const getPictures = await fetchApiPictures.fetchPictures();
     ({ hits, totalHits } = getPictures);
+    console.log( hits, totalHits )
     const totalPage = Math.ceil(totalHits / fetchApiPictures.per_page);
     if (fetchApiPictures.page <= totalPage) {
       refs.loadMoreBtn.style.display = 'none';

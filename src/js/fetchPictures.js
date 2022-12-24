@@ -32,4 +32,7 @@ export class FetchApiPictures {
   set requests(newRequests) {
     this.request = newRequests;
   }
+
+
+  
 }
